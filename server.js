@@ -1,5 +1,6 @@
 'use strict';
 
+require('dotenv').config();
 const express = require('express');
 const pg = require('pg');
 
@@ -7,8 +8,7 @@ let app = express();
 app.set('view engine', 'ejs');
 const PORT = process.env.PORT || 3000;
 
-const conString = process.env.DATABASE_URL ||
-'postgres://hannah:IloveAlex0801@localhost:5432/book_app'
+const conString = process.env.DATABASE_URL
 //'postgres://jasonlhiskey:7559@localhost:5432/book_app'
 ;
 let client = new pg.Client(conString);
