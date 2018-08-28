@@ -27,10 +27,10 @@ app.get('/', (req, res) => {
     });
 });
 
+app.use(express.static('./public'));
+
 app.get('*', (req, res) => {
   res.render('error');
 });
-
-app.use(express.static('./public'));
 
 app.listen(PORT, () => console.log('Server is up on ', PORT));
