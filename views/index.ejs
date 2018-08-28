@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book App</title>
+    <link rel="stylesheet" href="/styles/reset.css">
+    <link rel="stylesheet" href="/styles/base.css">
+    <link rel="stylesheet" href="/styles/layout.css">
+    <link rel="stylesheet" href="/styles/modules.css">
+    <link rel="stylesheet" href="/styles/icons.css">
+</head>
+<body>
+    hello world, view the following books. Number of books: <%= items.length %>
+    <ul>
+    <% items.forEach ( item => { %>
+        <li>
+            <img src="<%= item.image_url %>">
+            <p><%= item.title %></p>
+            <p><%= item.author %></p>
+        </li>
+    <% }); %>
+    </ul>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="/scripts/app.js"></script>
+</body>
+</html>
