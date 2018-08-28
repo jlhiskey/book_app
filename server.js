@@ -14,12 +14,12 @@ const conString = process.env.DATABASE_URL ||
 let client = new pg.Client(conString);
 client.connect();
 
-app.get('/books', (req, res) => {
+app.get('/', (req, res) => {
   let SQL = 'SELECT title, author, image_url FROM books';
   client.query(SQL)
     .then(data => {
       let books = data.rows;
-      res.render('index', {items:books});
+      res.render('master', {items:books});
     })
     .catch(err => {
       console.log(err);
