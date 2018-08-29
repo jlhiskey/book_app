@@ -1,26 +1,37 @@
 # 10-functional-programming
 
 **Author**: Jason
-**Version**: 1.0.0 (increment the patch/fix version number up if you make more commits past your first submission)
+**Version**: 1.0.1 (increment the patch/fix version number up if you make more commits past your first submission)
 
 ## Overview
-We are creating a database that the local server that runs off our machine and allows access by other users.
+This is an application that lets users search books from Google books and save them to a database for later viewing.
 
-## Getting Started
+## How to Use
  
- Clone https://github.com/jlhiskey/10-functional-programming.git Install dependencies. Run through the terminal. 
+ 1. Visit https://jh-hs-booklist.herokuapp.com/
 
-## Architecture
+## Architecture / Technologies Used
 
-Html, Css, Javascript, handlebars, Jquery, Express, nodemon
+### Frontend
+- HTML 
+- JavaScript
+- jQuery
+
+### Backend
+- Express
+- EJS
+- Postgres
+
+### Hosting 
+- Heroku
 
 ## Change Log
 
-08-26-2018 12:30pm - Application now has a fully-functional express server that is currently not supported by a local postgres due to issues with connecting to postgres through a pc.
+1.0.1 - 08-26-2018 2:00pm - Homepage functioning - lists books from database with picture, details. Basic styling done.
+1.0.0 - 08-26-2018 12:30pm - Application now has a fully-functional express server that is currently not supported by a local postgres due to issues with connecting to postgres through a pc.
 
 ## Credits and Collaborations
 
 https://expressjs.com/
 
 https://github.com/codefellows-seattle-301d37/08-sql-intro-and-postgres
--->
