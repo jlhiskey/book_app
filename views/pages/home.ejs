@@ -1,13 +1,2 @@
 Number of books: <%= items.length %>
-<ul>
-<% items.forEach ( item => { %>
-    <li>
-        <section class="book-card">
-            <img src="<%= item.image_url %>">
-            <h1><%= item.title %></h1>
-            <p class="author"><%= item.author %></p>
-            <a href="/show?book=<%= item.id %>" class="button view-details-button" id="<%= item.id %>">View Details</a>
-        </section>
-    </li>
-<% }); %>
-</ul>
+<%- include ../partials/book-card.ejs %>

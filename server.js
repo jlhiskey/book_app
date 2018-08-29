@@ -18,13 +18,10 @@ app.get('/', (req, res) => {
   client.query(SQL)
     .then(data => {
       let books = data.rows;
-      books.page = 'pages/home.ejs';
-      books.pageTitle = 'Saved Books';
-      res.render('master', {items:books});
+      res.render('master', {items:books, 'thisPage':'pages/home.ejs', 'thisPageTitle':'Saved Books'});
     })
     .catch(err => {
-      console.log(err);
-      res.render('pages/error');
+      errorHandling(req, res, err);
     });
 });
 
@@ -36,20 +33,22 @@ app.get('/show', (req, res) => {
   client.query(SQL, values)
     .then(data => {
       let books = data.rows;
-      books.page = 'pages/show.ejs';
-      books.pageTitle = 'View Details';
-      res.render('master', {items:books});
+      res.render('master', {items:books, 'thisPage':'pages/show.ejs', 'thisPageTitle':'View Details'});
     })
     .catch(err => {
-      console.log(err);
-      res.render('pages/error');
+      errorHandling(req, res, err);
     });
 });
 
 app.use(express.static('./public'));
 
 app.get('*', (req, res) => {
-  res.render('pages/error');
+  errorHandling(req, res);
 });
 
 app.listen(PORT, () => console.log('Server is up on ', PORT));
+
+function errorHandling(req, res, err) {
+  if (err) { console.log(err); }
+  res.render('master', {'thisPage':'pages/error.ejs', 'thisPageTitle':'Something broke!'});
+}

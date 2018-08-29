@@ -1,0 +1,14 @@
+<ul>
+<% items.forEach ( item => { %>
+    <li>
+        <section class="book-card">
+            <img src="<%= item.image_url %>">
+            <h1><%= item.title %></h1>
+            <p class="author"><%= item.author %></p>
+            <% if (thisPage === 'pages/show.ejs'){ %><p><%= item.book_description %></p><p>isbn: <%= item.isbn %></p><% } %>
+            <% if (thisPage === 'pages/home.ejs'){ %><a href="/show?book=<%= item.id %>" class="button view-details-button" id="<%= item.id %>">View Details</a><% } %>
+            <% if (thisPage === 'pages/show.ejs'){ %><a href="/" class="button view-details-button">Go back</a><% } %>
+        </section>
+    </li>
+<% }); %>
+</ul>
