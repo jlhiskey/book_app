@@ -1,7 +1,7 @@
-# 10-functional-programming
+# Best Books! App
 
-**Author**: Jason & Hannah
-**Version**: 1.0.2 (increment the patch/fix version number up if you make more commits past your first submission)
+- **Author**: Jason & Hannah
+- **Version**: 1.0.3
 
 ## Overview
 This is an application that lets users search books from Google books and save them to a database for later viewing.
