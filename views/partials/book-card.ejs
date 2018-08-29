@@ -5,7 +5,7 @@
             <img src="<%= item.image_url %>">
             <h1><%= item.title %></h1>
             <p class="author"><%= item.author %></p>
-            <% if (thisPage === 'pages/show.ejs'){ %><p><%= item.book_description %></p><p>isbn: <%= item.isbn %></p><% } %>
+            <% if (thisPage === 'pages/show.ejs'){ %><div class="book_description"><p><%= item.book_description %></p></div><p class="isbn">isbn: <%= item.isbn %></p><% } %>
             <% if (thisPage === 'pages/home.ejs'){ %><a href="/show?book=<%= item.id %>" class="button view-details-button" id="<%= item.id %>">View Details</a><% } %>
             <% if (thisPage === 'pages/show.ejs'){ %><a href="/" class="button view-details-button">Go back</a><% } %>
         </section>
