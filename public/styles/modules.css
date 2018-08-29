@@ -1,10 +1,11 @@
 /* site title, menu */
 
 .site-title {
-  background-color: #06460D;
+  background-color: #142e33;
   color: white;
-  font-size: 1.5em;
-  padding: .5em .2em;
+  font-size: 2em;
+  font-family: 'Permanent Marker';
+  padding: .5em;
   overflow: hidden;
 }
 
@@ -24,8 +25,9 @@ nav {
 /* page title */
 
 .page-title {
-  background-color: rgb(6, 70, 13);
+  background-color: #656171;
   color: white;
+  font-size: 1.2em;
   padding: .5em;
   text-align: center;
 }
@@ -42,7 +44,8 @@ nav {
 }
 
 .book-card img {
-  border: 5px solid white;
+  box-shadow: 2px 2px 3px rgba(0,0,0,.2);
+  width: 200px;
 }
 
 .book-card h1,
@@ -51,9 +54,9 @@ nav {
 }
 
 .book-card h1 {
-  color: white;
+  color: #53264A;
   font-size: 1.2em;
-  text-shadow: 1px 1px 3px rgba(0,0,0,.7);
+  font-weight: bold;
 }
 
 .book-card .author {
@@ -61,12 +64,34 @@ nav {
 }
 
 .book-card .button {
-  background-color: black;
+  background-color: #53264A;
   border-radius: 2px;
+  box-shadow: 2px 2px 3px rgba(0,0,0,.2);
   color: white;
   display: block;
   margin: 1em auto;
   padding: 1em 1.5em;
   text-decoration: none;
   width: fit-content;
+}
+
+.book-card .button:hover {
+  background-color: #142e33;
+}
+
+.book_description {
+  background: rgba(255, 255, 255, .2);
+  border: 1px solid rgba(0, 0, 0, .1);
+  margin: 2em;
+  padding: 2em;
+}
+
+.book_description p {
+  line-height: 1.5;
+  text-align: justify;
+}
+
+.isbn {
+  font-size: .8em;
+  font-style: italic;
 }

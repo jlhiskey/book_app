@@ -1,10 +1,21 @@
 body {
-  background-color: #C1BECA;
+  background-image: linear-gradient(to top, #d1cfda, #d7d5df, #dddbe4, #e3e1ea, #e9e7ef);
   color: #0B1B18;
-  font-family: sans-serif;
+  font-family: Quicksand, sans-serif;
   font-size: 20px;
 }
 
 img {
   max-width: 100%;
+}
+
+h2 {
+  font-weight: 700;
+}
+
+a,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: white;
 }

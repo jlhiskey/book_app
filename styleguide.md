@@ -2,11 +2,11 @@
 
 ## Primary Accent
 
-  - #06460D
+  - #142e33
 
 ## Secondary Accent
 
-  - #157959
+  - #656171
 
 ## Ternary Accent
 
