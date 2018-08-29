@@ -3,23 +3,48 @@
 .site-title {
   background-color: #142e33;
   color: white;
-  font-size: 2em;
-  font-family: 'Permanent Marker';
   padding: .5em;
   overflow: hidden;
 }
 
 .site-title h1 {
   float: left;
+  font-size: 2em;
+  font-family: 'Permanent Marker';
 }
 
-nav {
+/* nav menu */
+
+nav input,
+nav label,
+nav ul {
   float: right;
 }
 
-.icon-menu.navigation {
+nav label:hover {
+  cursor: pointer;
+}
+
+.icon-menu {
   color: white;
-  text-decoration: none;
+  font-size: 2em;
+}
+
+nav input[type="checkbox"] {
+  display: none;
+}
+
+nav li {
+  display: none;
+  font-size: 2em;
+}
+
+nav input[type="checkbox"]:checked ~ ul {
+  clear: both;
+}
+
+nav input[type="checkbox"]:checked ~ ul li {
+  display: block;
 }
 
 /* page title */
@@ -87,7 +112,6 @@ nav {
 
 .book_description p {
   line-height: 1.5;
-  text-align: justify;
 }
 
 .isbn {
@@ -99,5 +123,16 @@ nav {
   .book_description {
     margin: 2em;
     padding: 2em;
+    text-align: justify;
+  }
+  /* nav menu */
+  .icon-menu {
+    display: none;
+  }
+
+  nav li {
+    display: inline-block;
+    font-size: 1em;
+    padding: .5em;
   }
 }
