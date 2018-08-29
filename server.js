@@ -30,9 +30,10 @@ app.get('/', (req, res) => {
 
 // when clicking 'view details' on homepage
 app.get('/show', (req, res) => {
-  let bookId = req.body.id;
-  let SQL = `SELECT title, author, image_url, description, isbn FROM books WHERE id = ${bookId}`;
-  client.query(SQL)
+  let bookId = req.query.book;
+  let SQL = `SELECT title, author, image_url, book_description, isbn FROM books WHERE id = $1 `;
+  let values = [bookId];
+  client.query(SQL, values)
     .then(data => {
       let books = data.rows;
       books.page = 'pages/show.ejs';
