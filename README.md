@@ -27,9 +27,10 @@ This is an application that lets users search books from Google books and save t
 
 ## Change Log
 
-1.0.2 - 08-27-2018 12:12pm - Show details page functioning. Needs to be styled. Parted out the book cards into a partial with conditionals that show different details depending on page.
-1.0.1 - 08-26-2018 2:00pm - Homepage functioning - lists books from database with picture, details. Basic styling done.
-1.0.0 - 08-26-2018 12:30pm - Application now has a fully-functional express server that is currently not supported by a local postgres due to issues with connecting to postgres through a pc.
+- 1.0.3 - 08-27-2018 3:00pm - Added menu, hotfix to remove console log
+- 1.0.2 - 08-27-2018 12:12pm - Show details page functioning. Needs to be styled. Parted out the book cards into a partial with conditionals that show different details depending on page.
+- 1.0.1 - 08-26-2018 2:00pm - Homepage functioning - lists books from database with picture, details. Basic styling done.
+- 1.0.0 - 08-26-2018 12:30pm - Application now has a fully-functional express server that is currently not supported by a local postgres due to issues with connecting to postgres through a pc.
 
 ## Credits and Collaborations
 
