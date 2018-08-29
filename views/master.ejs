@@ -20,12 +20,12 @@
             </nav>
         </div>
         <div class="page-title">
-            <h2>Saved Books</h2>
+            <h2><%= items.pageTitle %></h2>
         </div>
     </header>
     <div class="content-container">
         <div class="content-container-inner">
-            <% include home.ejs %>
+            <%- include(items.page) %>
         </div>
     </div>  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

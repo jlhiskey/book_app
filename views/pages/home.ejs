@@ -6,7 +6,7 @@ Number of books: <%= items.length %>
             <img src="<%= item.image_url %>">
             <h1><%= item.title %></h1>
             <p class="author"><%= item.author %></p>
-            <a href="#" class="button">View Details</a>
+            <a href="/show" class="button view-details-button" id="<%= item.id %>">View Details</a>
         </section>
     </li>
 <% }); %>
