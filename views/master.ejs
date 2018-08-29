@@ -4,21 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Book App</title>
-    <link rel="stylesheet" href="/styles/reset.css">
-    <link rel="stylesheet" href="/styles/base.css">
-    <link rel="stylesheet" href="/styles/layout.css">
-    <link rel="stylesheet" href="/styles/modules.css">
-    <link rel="stylesheet" href="/styles/icons.css">
-    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Quicksand:400,700" rel="stylesheet">
+    <title>Best Books! - <%= thisPageTitle %></title>
+    <%- include partials/styles.ejs %>
 </head>
 <body>
     <header>
         <div class="site-title">
             <h1><a href="/">Best Books!</a></h1>
-            <nav>
-                <a href="#" class="icon-menu navigation"></a>
-            </nav>
+            <%- include partials/nav-menu.ejs %>
         </div>
         <div class="page-title">
             <h2><%= thisPageTitle %></h2>
@@ -29,7 +22,6 @@
             <%- include(thisPage) %>
         </div>
     </div>  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="/scripts/app.js"></script>
+    <%- include partials/scripts.ejs %>
 </body>
 </html>
