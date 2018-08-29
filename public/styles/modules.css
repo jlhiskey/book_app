@@ -82,8 +82,7 @@ nav {
 .book_description {
   background: rgba(255, 255, 255, .2);
   border: 1px solid rgba(0, 0, 0, .1);
-  margin: 2em;
-  padding: 2em;
+  padding: .5em;
 }
 
 .book_description p {
@@ -94,4 +93,11 @@ nav {
 .isbn {
   font-size: .8em;
   font-style: italic;
+}
+
+@media(min-width: 768px) {
+  .book_description {
+    margin: 2em;
+    padding: 2em;
+  }
 }
