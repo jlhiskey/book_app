@@ -117,13 +117,13 @@ nav input[type="checkbox"]:checked ~ ul li {
   cursor: pointer;
 }
 
-.book_description {
+.description {
   background: rgba(255, 255, 255, .2);
   border: 1px solid rgba(0, 0, 0, .1);
   padding: .5em;
 }
 
-.book_description p {
+.description p {
   line-height: 1.5;
 }
 
@@ -152,7 +152,7 @@ input[type="text"]:focus:invalid {
 }
 
 @media(min-width: 768px) {
-  .book_description {
+  .description {
     margin: 2em;
     padding: 2em;
     text-align: justify;
