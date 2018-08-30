@@ -135,6 +135,8 @@ nav input[type="checkbox"]:checked ~ ul li {
 /* new book form */
 
 input[type="text"],
+input[type="number"],
+input[type="url"],
 textarea {
   display: block;
   font-family: Quicksand;
@@ -144,16 +146,9 @@ textarea {
   width: 100%;
 }
 
-.form-error {
+input[type="text"]:focus:invalid {
   border: 1px solid red;
   color: red;
-}
-
-.form-error-message,
-.form-submit-error,
-.form-empty-message {
-  color: red;
-  display: none;
 }
 
 @media(min-width: 768px) {
