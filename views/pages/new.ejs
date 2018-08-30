@@ -1,14 +1,29 @@
 <form method="POST" action="/new/submit">
-    <label for="title">Title <span class="form-error-message">255 character limit</span></label>
-    <input type="text" id="title" name="title" placeholder="Title" />
-    <label for="author">Author <span class="form-error-message">255 character limit</span></label>
-    <input type="text" id="author" name="author" placeholder="Author" />
-    <label for="isbn">ISBN <span class="form-error-message">Please enter a valid ISBN</span></label>
-    <input type="text" id="isbn" name="isbn" placeholder="ISBN" />
-    <label for="image_url">Cover Image URL <span class="form-error-message">Please enter a valid URL</span></label>
-    <input type="text" id="image_url" name="image_url" placeholder="Cover Image URL">
-    <label for="book_description">Book Description (1000 words max) <span class="form-error-message">1000 word limit</span></label>
-    <textarea name="book_description" id="book_description" cols="30" rows="10">Book Description</textarea>
-    <span class="form-error-message">Please check fields</span>
+    <div>
+        <label for="title">Title <span class="form-error-message">255 character limit</span><span class="form-empty-message">Cannot be empty</span></label>
+        <input type="text" id="title" name="title" />
+    </div>
+
+    <div>
+        <label for="author">Author <span class="form-error-message">255 character limit</span><span class="form-empty-message">Cannot be empty</span></label>
+        <input type="text" id="author" name="author" />
+    </div>
+
+    <div>
+        <label for="isbn">ISBN <span class="form-error-message">Please enter a valid ISBN</span><span class="form-empty-message">Cannot be empty</span></label>
+        <input type="text" id="isbn" name="isbn" />
+    </div>
+
+    <div>
+        <label for="image_url">Cover Image URL <span class="form-error-message">Please enter a valid URL</span><span class="form-empty-message">Cannot be empty</span></label>
+        <input type="text" id="image_url" name="image_url" />
+    </div>
+
+    <div>
+        <label for="book_description">Book Description<span class="form-error-message">1000 word limit</span><span class="form-empty-message">Cannot be empty</span></label>
+        <textarea name="book_description" id="book_description" cols="30" rows="10"></textarea>
+    </div>
+
+    <span class="form-submit-error">Please check fields</span>
     <input type="submit" value="Submit!" class="button">
 </form>

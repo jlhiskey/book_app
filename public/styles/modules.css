@@ -140,7 +140,9 @@ textarea {
   color: red;
 }
 
-.form-error-message {
+.form-error-message,
+.form-submit-error,
+.form-empty-message {
   color: red;
   display: none;
 }

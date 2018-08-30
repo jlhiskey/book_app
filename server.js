@@ -13,6 +13,8 @@ const conString = process.env.DATABASE_URL;
 let client = new pg.Client(conString);
 client.connect();
 
+// Routes
+
 // home
 app.get('/', (req, res) => {
   homePage(req, res);
@@ -35,12 +37,14 @@ app.post('/new/submit', (req, res) => {
 app.use(express.static('./public'));
 
 app.get('*', (req, res) => {
-  errorHandling(req, res);
+  errorHandling(res);
 });
 
 app.listen(PORT, () => console.log('Server is up on ', PORT));
 
-function errorHandling(req, res, err) {
+// Route Behavior
+
+function errorHandling(res, err) {
   if (err) { console.log(err); }
   res.render('master', {'thisPage':'pages/error.ejs', 'thisPageTitle':'Something broke!'});
 }
@@ -67,7 +71,7 @@ function viewDetails(req, res) {
       res.render('master', {items:books, 'thisPage':'pages/show.ejs', 'thisPageTitle':'View Details'});
     })
     .catch(err => {
-      errorHandling(req, res, err);
+      errorHandling(res, err);
     });
 }
 
@@ -82,9 +86,18 @@ function addNew(req, res) {
   ];
   client.query(SQL, values)
     .then( () => {
-      res.render('master', {'thisPage': 'pages/submit.ejs', 'thisPageTitle': 'Submitted!'});
+      res.render('master', {
+        'thisPage': 'pages/submit.ejs',
+        'thisPageTitle': 'Submitted!',
+        items: [{title: req.body.title,
+          author: req.body.author,
+          isbn: req.body.isbn,
+          image_url: req.body.image_url,
+          book_description: req.body.book_description
+        }]
+      });
     })
     .catch( () => {
-      errorHandling(req, res);
+      errorHandling(res);
     });
 }
