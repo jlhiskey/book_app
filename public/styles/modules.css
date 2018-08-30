@@ -13,6 +13,10 @@
   font-family: 'Permanent Marker';
 }
 
+.site-title h1 a:hover {
+  color: #d1cfda;
+}
+
 /* nav menu */
 
 nav input,
@@ -37,6 +41,11 @@ nav input[type="checkbox"] {
 nav li {
   display: none;
   font-size: 2em;
+}
+
+nav li a:hover,
+nav li a:active {
+  color: #d1cfda;
 }
 
 nav input[type="checkbox"]:checked ~ ul {
@@ -88,20 +97,24 @@ nav input[type="checkbox"]:checked ~ ul li {
   font-style: italic;
 }
 
-.book-card .button {
+.button {
   background-color: #53264A;
   border-radius: 2px;
+  border: none;
   box-shadow: 2px 2px 3px rgba(0,0,0,.2);
   color: white;
   display: block;
+  font-family: Quicksand;
+  font-size: 1em;
   margin: 1em auto;
   padding: 1em 1.5em;
   text-decoration: none;
   width: fit-content;
 }
 
-.book-card .button:hover {
+.button:hover {
   background-color: #142e33;
+  cursor: pointer;
 }
 
 .book_description {
@@ -119,12 +132,32 @@ nav input[type="checkbox"]:checked ~ ul li {
   font-style: italic;
 }
 
+/* new book form */
+
+input[type="text"],
+input[type="number"],
+input[type="url"],
+textarea {
+  display: block;
+  font-family: Quicksand;
+  font-size: 1em;
+  margin: .5em 0;
+  padding: .5em;
+  width: 100%;
+}
+
+input[type="text"]:focus:invalid {
+  border: 1px solid red;
+  color: red;
+}
+
 @media(min-width: 768px) {
   .book_description {
     margin: 2em;
     padding: 2em;
     text-align: justify;
   }
+
   /* nav menu */
   .icon-menu {
     display: none;
