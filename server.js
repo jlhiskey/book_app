@@ -37,18 +37,14 @@ app.post('/new/submit', (req, res) => {
 app.use(express.static('./public'));
 
 app.get('*', (req, res) => {
-  errorHandling(res);
+  pageNotFound(res);
 });
 
 app.listen(PORT, () => console.log('Server is up on ', PORT));
 
 // Route Behavior
 
-function errorHandling(res, err) {
-  if (err) { console.log(err); }
-  res.render('master', {'thisPage':'pages/error.ejs', 'thisPageTitle':'Something broke!'});
-}
-
+// visiting homepage (get)
 function homePage(req, res) {
   let SQL = 'SELECT title, author, image_url, id FROM books';
   client.query(SQL)
@@ -57,10 +53,11 @@ function homePage(req, res) {
       res.render('master', {items:books, 'thisPage':'pages/home.ejs', 'thisPageTitle':'Saved Books'});
     })
     .catch(err => {
-      errorHandling(req, res, err);
+      pageNotFound(req, res, err);
     });
 }
 
+// clicking view details on homepage (get)
 function viewDetails(req, res) {
   let bookId = req.query.book;
   let SQL = `SELECT title, author, image_url, book_description, isbn FROM books WHERE id = $1 `;
@@ -68,13 +65,16 @@ function viewDetails(req, res) {
   client.query(SQL, values)
     .then(data => {
       let books = data.rows;
-      res.render('master', {items:books, 'thisPage':'pages/show.ejs', 'thisPageTitle':'View Details'});
+      if (books.length > 0) {
+        res.render('master', {items:books, 'thisPage':'pages/show.ejs', 'thisPageTitle':'View Details'});
+      } else { throw ('database error'); }
     })
     .catch(err => {
-      errorHandling(res, err);
+      pageNotFound(res, err);
     });
 }
 
+// clicking submit on new book page (post)
 function addNew(req, res) {
   let SQL = `INSERT INTO books (title, author, isbn, image_url, book_description) VALUES ( $1, $2, $3, $4, $5 )`;
   let values = [
@@ -98,6 +98,18 @@ function addNew(req, res) {
       });
     })
     .catch( () => {
-      errorHandling(res);
+      formError(res);
     });
+}
+
+// Error behavior
+
+function pageNotFound(res, err) {
+  if (err) { console.log(err); }
+  res.render('master', {'thisPage':'pages/errors/pagenotfound.ejs', 'thisPageTitle':'Something broke!'});
+}
+
+function formError(res, err) {
+  if (err) { console.log(err); }
+  res.render('master', {'thisPage':'pages/errors/formerror.ejs', 'thisPageTitle':'Something broke!'});
 }
