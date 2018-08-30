@@ -6,10 +6,10 @@ CREATE TABLE books (
     author VARCHAR(255),
     isbn VARCHAR(255),
     image_url VARCHAR(255),
-    book_description TEXT
+    description TEXT
 );
 
-INSERT INTO books (title, author, isbn, image_url, book_description) VALUES
+INSERT INTO books (title, author, isbn, image_url, description) VALUES
 ('Master and Commander (Vol. Book 1)', 'Patrick O''Brian', '9780393058956', 'http://books.google.com/books/content?id=HaEdbjUalUEC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', 'The beginning of the sweeping Aubrey-Maturin series. \"The best sea story I have ever read.\"—Sir Francis Chichester This, the first in the splendid series of Jack Aubrey novels, establishes the friendship between Captain Aubrey, R.N., and Stephen Maturin, ship''s surgeon and intelligence agent, against a thrilling backdrop of the Napoleonic wars. Details of a life aboard a man-of-war in Nelson''s navy are faultlessly rendered: the conversational idiom of the officers in the ward room and the men on the lower deck, the food, the floggings, the mysteries of the wind and the rigging, and the roar of broadsides as the great ships close in battle.'),
 
 ('Code', 'Charles Petzold', '9780735638723', 'http://books.google.com/books/content?id=iptCAwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', 'What do flashlights, the British invasion, black cats, and seesaws have to do with computers? In CODE, they show us the ingenious ways we manipulate language and invent new means of communicating with each other. And through CODE, we see how this ingenuity and our very human compulsion to communicate have driven the technological innovations of the past two centuries. Using everyday objects and familiar language systems such as Braille and Morse code, author Charles Petzold weaves an illuminating narrative for anyone who’s ever wondered about the secret inner life of computers and other smart machines. It’s a cleverly illustrated and eminently comprehensible story—and along the way, you’ll discover you’ve gained a real context for understanding today’s world of PCs, digital media, and the Internet. No matter what your level of technical savvy, CODE will charm you—and perhaps even awaken the technophile within.'),

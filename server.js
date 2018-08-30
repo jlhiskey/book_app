@@ -60,7 +60,7 @@ function homePage(req, res) {
 // clicking view details on homepage (get)
 function viewDetails(req, res) {
   let bookId = req.query.book;
-  let SQL = `SELECT title, author, image_url, book_description, isbn FROM books WHERE id = $1 `;
+  let SQL = `SELECT title, author, image_url, description, isbn FROM books WHERE id = $1 `;
   let values = [bookId];
   client.query(SQL, values)
     .then(data => {
@@ -76,13 +76,13 @@ function viewDetails(req, res) {
 
 // clicking submit on new book page (post)
 function addNew(req, res) {
-  let SQL = `INSERT INTO books (title, author, isbn, image_url, book_description) VALUES ( $1, $2, $3, $4, $5 )`;
+  let SQL = `INSERT INTO books (title, author, isbn, image_url, description) VALUES ( $1, $2, $3, $4, $5 )`;
   let values = [
     req.body.title,
     req.body.author,
     req.body.isbn,
     req.body.image_url,
-    req.body.book_description
+    req.body.description
   ];
   client.query(SQL, values)
     .then( () => {
@@ -93,7 +93,7 @@ function addNew(req, res) {
           author: req.body.author,
           isbn: req.body.isbn,
           image_url: req.body.image_url,
-          book_description: req.body.book_description
+          description: req.body.description
         }]
       });
     })
