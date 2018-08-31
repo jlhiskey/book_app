@@ -20,14 +20,24 @@ app.get('/', (req, res) => {
   homePage(req, res);
 });
 
-// when clicking 'view details' on homepage
+// when clicking 'view details' on homepage 
 app.get('/show', (req, res) => {
-  viewDetails(req, res);
+  viewResults(req, res);
 });
+
+// shows search results INCOMPLETE
+// app.get('/search', (req, res) => {
+//   searchResults(req, res);
+// });
 
 // add new book
 app.get('/new', (req, res) => {
   res.render('master', {'thisPage': 'pages/new.ejs', 'thisPageTitle': 'Add a New Book'});
+});
+
+// search for a new book
+app.get('/search', (req, res) => {
+  res.render('master', {'thisPage': 'pages/search.ejs', 'thisPageTitle': 'Search for a Book'});
 });
 
 app.post('/new/submit', (req, res) => {
@@ -67,6 +77,23 @@ function viewDetails(req, res) {
       let books = data.rows;
       if (books.length > 0) {
         res.render('master', {items:books, 'thisPage':'pages/show.ejs', 'thisPageTitle':'View Details'});
+      } else { throw ('database error'); }
+    })
+    .catch(err => {
+      pageNotFound(res, err);
+    });
+}
+
+// search results  INCOMPLETE
+function searchResults(req, res) {
+  let bookId = req.query.book;
+  let SQL = `SELECT title, author, image_url, description, isbn FROM books WHERE id = $1 `;
+  let values = [bookId];
+  client.query(SQL, values)
+    .then(data => {
+      let books = data.rows;
+      if (books.length > 0) {
+        res.render('master', {items:books, 'thisPage':'pages/search.ejs', 'thisPageTitle':'View Details'});
       } else { throw ('database error'); }
     })
     .catch(err => {
