@@ -5,13 +5,13 @@ const express = require('express');
 const pg = require('pg');
 const superagent = require('superagent');
 
-let app = express();
+const app = express();
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended:true}));
 const PORT = process.env.PORT || 3000;
 
 const conString = process.env.DATABASE_URL;
-let client = new pg.Client(conString);
+const client = new pg.Client(conString);
 client.connect();
 
 // Routes
@@ -23,13 +23,8 @@ app.get('/', (req, res) => {
 
 // when clicking 'view details' on homepage
 app.get('/show', (req, res) => {
-  viewResults(req, res);
+  viewDetails(req, res);
 });
-
-// shows search results INCOMPLETE
-// app.get('/search', (req, res) => {
-//   searchResults(req, res);
-// });
 
 // add new book
 app.get('/new', (req, res) => {
@@ -43,6 +38,10 @@ app.get('/search', (req, res) => {
 
 app.post('/new/submit', (req, res) => {
   addNew(req, res);
+});
+
+app.post('/search/submit', (req, res) => {
+  bookSearch(req, res);
 });
 
 app.use(express.static('./public'));
@@ -87,42 +86,35 @@ function viewDetails(req, res) {
 
 // search results  INCOMPLETE
 function bookSearch(req, res) {
-  let url = 'https://www.googleapis.com/books/v1/volumes?q=search+terms';
-  let params = {
-    q:encodeURIComponent(request.params.category)
-  };
+  let url = 'https://www.googleapis.com/books/v1/volumes?q=';
+  // let params = {
+  //   q:encodeURIComponent(request.params.category)
+  // };
   let queryType = '';
-
- // I think this needs to be wrapped.
-  if (req.body.search-by === 'search-by-author') {
+  if (req.body.searchBy === 'searchByAuthor') {
     queryType = 'inauthor';
   }
-  if (req.body.search-by === 'search-by-title') {
+  if (req.body.searchBy === 'searchByTitle') {
     queryType = 'intitle';
   }
 
-  url = url + '?' + queryType;
+  url += queryType + ':' + req.body.searchquery;
 
   superagent.get(url)
-  .then( results => {
-    let books = results.body.items.reduce( (items,item,idx) => {
-      let book = {
-        title: item.title,
-        author: item.author,
-        isbn: item.isbn,
-        image_url: item.image_url,
-        description: item.description,
-      };
-      items.push(book);
-      return books;
-      },[]);
-// Add More here
-      response.render('')
-    })
-  }) // Fix This
-
-
-
+    .then( results => {
+      let books = results.body.items.reduce( (acc, curr, idx) => {
+        let book = {
+          title: curr.volumeInfo.title,
+          author: curr.volumeInfo.authors[0],
+          isbn: curr.volumeInfo.industryIdentifiers[0].identifier,
+          image_url: curr.volumeInfo.imageLinks.smallThumbnail,
+          description: curr.volumeInfo.description,
+        };
+        acc.push(book);
+        return acc;
+      }, []);
+      res.render('master', {items:books, 'thisPage':'pages/result.ejs', 'thisPageTitle':'Search Results'});
+    });
 }
 
 

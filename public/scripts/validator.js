@@ -29,7 +29,7 @@ $('form').on('blur', 'div input[type="text"], div input[type="number"], div text
       individualValidator(field, validatorLength(field, 255));
       //TODO: run url validator
     }
-    if (field.attr('id') === 'book_description') {
+    if (field.attr('id') === 'description') {
       individualValidator(field, validatorLength(field, 6000));
       // TODO: run word count validator
     }

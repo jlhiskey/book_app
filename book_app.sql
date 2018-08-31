@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS books;
+DROP TABLE IF EXISTS book_id_seq;
 
 CREATE TABLE books (
     id SERIAL PRIMARY KEY,
