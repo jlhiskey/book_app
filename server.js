@@ -3,14 +3,15 @@
 require('dotenv').config();
 const express = require('express');
 const pg = require('pg');
+const superagent = require('superagent');
 
-let app = express();
+const app = express();
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended:true}));
 const PORT = process.env.PORT || 3000;
 
 const conString = process.env.DATABASE_URL;
-let client = new pg.Client(conString);
+const client = new pg.Client(conString);
 client.connect();
 
 // Routes
@@ -30,8 +31,17 @@ app.get('/new', (req, res) => {
   res.render('master', {'thisPage': 'pages/new.ejs', 'thisPageTitle': 'Add a New Book'});
 });
 
+// search for a new book
+app.get('/search', (req, res) => {
+  res.render('master', {'thisPage': 'pages/search.ejs', 'thisPageTitle': 'Search for a Book'});
+});
+
 app.post('/new/submit', (req, res) => {
   addNew(req, res);
+});
+
+app.post('/search/submit', (req, res) => {
+  bookSearch(req, res);
 });
 
 app.use(express.static('./public'));
@@ -60,7 +70,7 @@ function homePage(req, res) {
 // clicking view details on homepage (get)
 function viewDetails(req, res) {
   let bookId = req.query.book;
-  let SQL = `SELECT title, author, image_url, book_description, isbn FROM books WHERE id = $1 `;
+  let SQL = `SELECT title, author, image_url, description, isbn FROM books WHERE id = $1 `;
   let values = [bookId];
   client.query(SQL, values)
     .then(data => {
@@ -74,15 +84,50 @@ function viewDetails(req, res) {
     });
 }
 
+// search + results (post)
+function bookSearch(req, res) {
+  let url = 'https://www.googleapis.com/books/v1/volumes?q=';
+  let queryType = '';
+  if (req.body.searchBy === 'searchByAuthor') {
+    queryType = 'inauthor';
+  }
+  if (req.body.searchBy === 'searchByTitle') {
+    queryType = 'intitle';
+  }
+
+  url += queryType + ':' + req.body.searchquery;
+
+  superagent.get(url)
+    .then( results => {
+      if (!results.body.items) { throw ('search error'); }
+      let books = results.body.items.reduce( (acc, curr) => {
+        let book = {
+          title: curr.volumeInfo.title || '',
+          author: curr.volumeInfo.authors[0] || '',
+          isbn: curr.volumeInfo.industryIdentifiers[0].identifier || '',
+          image_url: curr.volumeInfo.imageLinks.smallThumbnail,
+          description: curr.volumeInfo.description || '',
+        };
+        acc.push(book);
+        return acc;
+      }, []);
+      res.render('master', {items:books, 'thisPage':'pages/result.ejs', 'thisPageTitle':'Search Results'});
+    })
+    .catch(err => {
+      searchError(req, res, err);
+    });
+}
+
+
 // clicking submit on new book page (post)
 function addNew(req, res) {
-  let SQL = `INSERT INTO books (title, author, isbn, image_url, book_description) VALUES ( $1, $2, $3, $4, $5 )`;
+  let SQL = `INSERT INTO books (title, author, isbn, image_url, description) VALUES ( $1, $2, $3, $4, $5 )`;
   let values = [
     req.body.title,
     req.body.author,
     req.body.isbn,
     req.body.image_url,
-    req.body.book_description
+    req.body.description
   ];
   client.query(SQL, values)
     .then( () => {
@@ -93,7 +138,7 @@ function addNew(req, res) {
           author: req.body.author,
           isbn: req.body.isbn,
           image_url: req.body.image_url,
-          book_description: req.body.book_description
+          description: req.body.description
         }]
       });
     })
@@ -112,4 +157,9 @@ function pageNotFound(res, err) {
 function formError(res, err) {
   if (err) { console.log(err); }
   res.render('master', {'thisPage':'pages/errors/formerror.ejs', 'thisPageTitle':'Something broke!'});
+}
+
+function searchError(req, res, err) {
+  if (err) { console.log(err); }
+  res.render('master', {'searchQuery': req.body.searchquery, 'thisPage':'pages/errors/searcherror.ejs', 'thisPageTitle':'Nothing Found!'});
 }

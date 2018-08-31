@@ -1,12 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    SEARCH FOR BOOK
-</body>
-</html>
+<p>Enter your search query below, select whether you would like to search by title or author, and click "Submit". </p>
+<form action="/search/submit" method="post">
+    <label for="searchquery">Search Query</label>
+    <input type="text" name="searchquery" id="searchquery" required />
+    <fieldset>
+        <legend>Search by...</legend>
+        <div>
+            <input type="radio" id="searchByAuthor" name="searchBy" value="searchByAuthor" required />
+            <label for="searchByAuthor">Author</label>
+        </div>
+        <div>
+            <input type="radio" id="searchByTitle" name="searchBy" value="searchByTitle" />
+            <label for="searchByTitle">Title</label>
+        </div>
+    </fieldset>
+    <input type="submit" value="Search" class="button">
+</form>
