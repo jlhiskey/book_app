@@ -1,8 +1,8 @@
 <form method="POST" action="/new/submit">
-    <input type="hidden" id="title" name="title" />
-    <input type="hidden" id="author" name="author" />
-    <input type="hidden" id="isbn" name="isbn" />
-    <input type="hidden" id="image_url" name="image_url" />
-    <input type="hidden" name="description" id="description" />
+    <input type="hidden" id="title" name="title" value="<%= item.title %>" />
+    <input type="hidden" id="author" name="author" value="<%= item.author %>" />
+    <input type="hidden" id="isbn" name="isbn" value="<%= item.isbn %>" />
+    <input type="hidden" id="image_url" name="image_url" value="<%= item.image_url %>" />
+    <input type="hidden" name="description" id="description" value="<%= item.description %>" />
     <input type="submit" value="Add Book" class="button">
 </form>
