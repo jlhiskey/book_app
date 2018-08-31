@@ -143,13 +143,40 @@ textarea {
   font-size: 1em;
   margin: .5em 0;
   padding: .5em;
-  width: 100%;
+  width: 96.093%;
 }
 
 input[type="text"]:focus:invalid {
   border: 1px solid red;
   color: red;
 }
+
+/* book search */
+
+input[type="radio"] {
+  opacity: 0;
+}
+
+input[type="radio"] ~ label {
+  background-color: #53264A;
+  border-radius: 2px;
+  box-shadow: 2px 2px 3px rgba(0,0,0,.2);
+  color: white;
+  cursor: pointer;
+  display: block;
+  padding: 1em 1.5em;
+  text-align: center;
+}
+
+input[type="radio"] ~ label:hover {
+  background-color: #142e33;
+}
+
+input[type="radio"]:checked ~ label {
+  background-color: #656171;
+}
+
+/* desktop/large tablet styling */
 
 @media(min-width: 768px) {
   .description {

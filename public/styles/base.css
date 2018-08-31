@@ -25,3 +25,7 @@ a:active {
   text-decoration: none;
   color: white;
 }
+
+p {
+  margin-bottom: 1em;
+}
