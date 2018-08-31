@@ -1,12 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    SEARCH FOR BOOK
-</body>
-</html>
+Search stuff
+
+<form action="/search/submit" method="post">
+    <label for="author">Author</label>
+    <input type="text" name="author" id="author" >
+    <label for="title">Title</label>
+    <input type="text" name="title" id="title" >
+    <fieldset>
+        <legend>Search by...</legend>
+        <label for="search-by">Author</label>
+        <input type="radio" id="search-by-author" for="search-by">
+        <label for="search-by-title">Title</label>
+        <input type="radio" id="search-by-title" for="search-by">
+    </fieldset>
+</form>

@@ -23,6 +23,10 @@
                     <% if(thisPage === 'pages/submit.ejs' ){ %>Home<% } %>
                 </a>
             <% } %>
+            
+            <% if (thisPage === 'pages/result.ejs') { %>
+                <%-include ../partials/book-search-form.ejs %>
+            <% } %>
         </section>
     </li>
 <% }); %>
