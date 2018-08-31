@@ -3,6 +3,7 @@
 require('dotenv').config();
 const express = require('express');
 const pg = require('pg');
+const superagent = require('superagent');
 
 let app = express();
 app.set('view engine', 'ejs');
@@ -20,7 +21,7 @@ app.get('/', (req, res) => {
   homePage(req, res);
 });
 
-// when clicking 'view details' on homepage 
+// when clicking 'view details' on homepage
 app.get('/show', (req, res) => {
   viewResults(req, res);
 });
@@ -85,21 +86,45 @@ function viewDetails(req, res) {
 }
 
 // search results  INCOMPLETE
-function searchResults(req, res) {
-  let bookId = req.query.book;
-  let SQL = `SELECT title, author, image_url, description, isbn FROM books WHERE id = $1 `;
-  let values = [bookId];
-  client.query(SQL, values)
-    .then(data => {
-      let books = data.rows;
-      if (books.length > 0) {
-        res.render('master', {items:books, 'thisPage':'pages/search.ejs', 'thisPageTitle':'View Details'});
-      } else { throw ('database error'); }
+function bookSearch(req, res) {
+  let url = 'https://www.googleapis.com/books/v1/volumes?q=search+terms';
+  let params = {
+    q:encodeURIComponent(request.params.category)
+  };
+  let queryType = '';
+
+ // I think this needs to be wrapped.
+  if (req.body.search-by === 'search-by-author') {
+    queryType = 'inauthor';
+  }
+  if (req.body.search-by === 'search-by-title') {
+    queryType = 'intitle';
+  }
+
+  url = url + '?' + queryType;
+
+  superagent.get(url)
+  .then( results => {
+    let books = results.body.items.reduce( (items,item,idx) => {
+      let book = {
+        title: item.title,
+        author: item.author,
+        isbn: item.isbn,
+        image_url: item.image_url,
+        description: item.description,
+      };
+      items.push(book);
+      return books;
+      },[]);
+// Add More here
+      response.render('')
     })
-    .catch(err => {
-      pageNotFound(res, err);
-    });
+  }) // Fix This
+
+
+
 }
+
 
 // clicking submit on new book page (post)
 function addNew(req, res) {
