@@ -84,12 +84,9 @@ function viewDetails(req, res) {
     });
 }
 
-// search results  INCOMPLETE
+// search + results (post)
 function bookSearch(req, res) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
-  // let params = {
-  //   q:encodeURIComponent(request.params.category)
-  // };
   let queryType = '';
   if (req.body.searchBy === 'searchByAuthor') {
     queryType = 'inauthor';
@@ -102,18 +99,22 @@ function bookSearch(req, res) {
 
   superagent.get(url)
     .then( results => {
-      let books = results.body.items.reduce( (acc, curr, idx) => {
+      if (!results.body.items) { throw ('search error'); }
+      let books = results.body.items.reduce( (acc, curr) => {
         let book = {
-          title: curr.volumeInfo.title,
-          author: curr.volumeInfo.authors[0],
-          isbn: curr.volumeInfo.industryIdentifiers[0].identifier,
+          title: curr.volumeInfo.title || '',
+          author: curr.volumeInfo.authors[0] || '',
+          isbn: curr.volumeInfo.industryIdentifiers[0].identifier || '',
           image_url: curr.volumeInfo.imageLinks.smallThumbnail,
-          description: curr.volumeInfo.description,
+          description: curr.volumeInfo.description || '',
         };
         acc.push(book);
         return acc;
       }, []);
       res.render('master', {items:books, 'thisPage':'pages/result.ejs', 'thisPageTitle':'Search Results'});
+    })
+    .catch(err => {
+      searchError(req, res, err);
     });
 }
 
@@ -156,4 +157,9 @@ function pageNotFound(res, err) {
 function formError(res, err) {
   if (err) { console.log(err); }
   res.render('master', {'thisPage':'pages/errors/formerror.ejs', 'thisPageTitle':'Something broke!'});
+}
+
+function searchError(req, res, err) {
+  if (err) { console.log(err); }
+  res.render('master', {'searchQuery': req.body.searchquery, 'thisPage':'pages/errors/searcherror.ejs', 'thisPageTitle':'Nothing Found!'});
 }
