@@ -104,8 +104,8 @@ function bookSearch(req, res) {
         let book = {
           title: curr.volumeInfo.title || '',
           author: curr.volumeInfo.authors[0] || '',
-          isbn: curr.volumeInfo.industryIdentifiers[0].identifier || '',
-          image_url: curr.volumeInfo.imageLinks.smallThumbnail,
+          isbn: curr.volumeInfo.industryIdentifiers ? curr.volumeInfo.industryIdentifiers[0].identifier : 'No ISBN',
+          image_url: curr.volumeInfo.imageLinks ? curr.volumeInfo.imageLinks.smallThumbnail : 'images/No_Cover.jpg',
           description: curr.volumeInfo.description || '',
         };
         acc.push(book);
